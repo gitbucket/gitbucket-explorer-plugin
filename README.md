@@ -33,7 +33,7 @@ Copy the downloaded plug-in JAR file to your `GITBUCKET_HOME/plugins` directory,
 
 Building
 ---
-Pre-requisites are Node, NPM, SBT, and Java 8.
+Pre-requisites are Node, NPM, SBT, and Java 17.
 - Run `npm install` to install all node dependencies.
 - Run `npm run-script release` to create a **complete** release (this will call SBT too).
 
@@ -84,4 +84,5 @@ Credits
 ---
 
 This plug-in was developed by [@tomoki1207](https://github.com/tomoki1207).
+
 
