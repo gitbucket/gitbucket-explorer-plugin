@@ -1,4 +1,4 @@
-gitbucket-explorer-plugin [![Gitter](https://img.shields.io/gitter/room/gitbucket/gitbucket.js.svg?style=flat-square)](https://gitter.im/gitbucket/gitbucket) [![Travis](https://img.shields.io/travis/gitbucket-plugins/gitbucket-explorer-plugin.svg?style=flat-square)](https://travis-ci.org/gitbucket-plugins/gitbucket-explorer-plugin)
+gitbucket-explorer-plugin
 ===
 
 This plugin provides an explorer like file tree for GIT repositories with [GitBucket](https://github.com/gitbucket/gitbucket).
@@ -84,3 +84,4 @@ Credits
 ---
 
 This plug-in was developed by [@tomoki1207](https://github.com/tomoki1207).
+
