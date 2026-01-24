@@ -1,7 +1,7 @@
 organization := "io.github.gitbucket"
 name := "gitbucket-explorer-plugin"
 version := "9.0.0"
-scalaVersion := "2.13.5"
+scalaVersion := "2.13.18"
 gitbucketVersion := "4.35.3"
 
 scalacOptions := Seq("-deprecation", "-feature", "-language:postfixOps")
