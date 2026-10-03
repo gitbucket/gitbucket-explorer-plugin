@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 
 export default class File extends React.Component {
-
   static get propTypes() {
     return {
       url: PropTypes.string.isRequired,

@@ -3,7 +3,6 @@ import FileNodes from './FileNodes';
 import Directory from './Directory';
 
 export default class Root extends Directory {
-
   componentWillMount() {
     const logo = document.querySelector('header.main-header a.logo');
     if (!logo) {

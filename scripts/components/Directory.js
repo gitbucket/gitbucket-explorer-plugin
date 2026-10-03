@@ -6,7 +6,6 @@ import FileNodes from './FileNodes';
 import { stopAutoScroll } from './scroll';
 
 export default class Directory extends React.Component {
-
   static get propTypes() {
     return {
       url: PropTypes.string,

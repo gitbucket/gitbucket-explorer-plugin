@@ -16,10 +16,13 @@ function normalizePath(path) {
 }
 
 export default class FileNodes extends React.Component {
-
   static get propTypes() {
     return {
-      data: PropTypes.array.isRequired,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+        isDirectory: PropTypes.bool.isRequired,
+      })).isRequired,
     };
   }
 
