@@ -3,19 +3,22 @@ import ReactMixin from 'react-mixin';
 import LocalStorageMixin from 'react-localstorage';
 import request from 'superagent';
 import FileNodes from './FileNodes';
+import { stopAutoScroll } from './scroll';
 
 export default class Directory extends React.Component {
 
   static get propTypes() {
     return {
       url: PropTypes.string,
-      name: PropTypes.string
+      name: PropTypes.string,
+      current: PropTypes.bool
     };
   }
   static get getDefaultProps() {
     return {
       url: '',
-      name: ''
+      name: '',
+      current: false
     };
   }
 
@@ -27,22 +30,13 @@ export default class Directory extends React.Component {
     };
   }
 
-  getLocalStorageKey() {
-    return this.props.url;
-  }
-
-  toggleFolder(path) {
-    if (this.state.expanded) {
-      this.setState({
-        expanded: false,
-        children: []
-      });
-    } else {
-      this.setState({ expanded: true });
+  // also runs when the expanded flag is restored from localStorage
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.expanded && !prevState.expanded) {
       request
-        .get(path)
+        .get(this.getExploreUrl())
         .end((err, res) => {
-          if (err) {
+          if (err || !this.state.expanded) {
             return;
           }
           try {
@@ -54,11 +48,37 @@ export default class Directory extends React.Component {
     }
   }
 
+  getLocalStorageKey() {
+    return this.props.url;
+  }
+
+  // persist only the expanded flag; children are always loaded from the server
+  // eslint-disable-next-line class-methods-use-this
+  getStateFilterKeys() {
+    return ['expanded'];
+  }
+
+  getExploreUrl() {
+    return this.props.url;
+  }
+
+  toggleFolder() {
+    stopAutoScroll();
+    if (this.state.expanded) {
+      this.setState({
+        expanded: false,
+        children: []
+      });
+    } else {
+      this.setState({ expanded: true });
+    }
+  }
+
   render() {
     const arrow = this.state.expanded ? 'octicon octicon-chevron-down' : 'octicon octicon-chevron-right';
     return (
-      <li className="folder-node">
-        <button className="folder-expander" onClick={() => this.toggleFolder(this.props.url)}>
+      <li className={this.props.current ? 'folder-node current' : 'folder-node'}>
+        <button className="folder-expander" onClick={() => this.toggleFolder()}>
           <i className={arrow} />
           <i className="menu-icon octicon octicon-file-directory" />
           {this.props.name}

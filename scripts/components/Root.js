@@ -34,16 +34,20 @@ export default class Root extends Directory {
     return `${this.state.rootPath}/${this.state.branch}`;
   }
 
+  getExploreUrl() {
+    return `${this.state.rootPath}/explore/${this.state.branch}`;
+  }
+
   render() {
     const arrow = this.state.expanded ? 'octicon octicon-chevron-down' : 'octicon octicon-chevron-right';
     return (
       <div className="tree-node">
-        <button className="root-expander btn btn-default" onClick={() => this.toggleFolder(`${this.state.rootPath}/explore/${this.state.branch}`)} >
+        <button className="root-expander btn btn-default" onClick={() => this.toggleFolder()} >
           <i className={arrow} />
         </button>
         <a href={this.state.rootPath} className="submenu-files" >
           <i className="menu-icon octicon octicon-file-directory" />
-          Files
+          <span>Files</span>
         </a>
         <div className="file-tree" style={this.state.expanded ? {} : { display: 'none' }} >
           <FileNodes data={this.state.children} />

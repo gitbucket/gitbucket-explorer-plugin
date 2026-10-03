@@ -6,12 +6,18 @@ export default class File extends React.Component {
     return {
       url: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      current: PropTypes.bool,
+    };
+  }
+  static get defaultProps() {
+    return {
+      current: false,
     };
   }
 
   render() {
     return (
-      <li className="file-node">
+      <li className={this.props.current ? 'file-node current' : 'file-node'}>
         <a href={this.props.url}>
           <i className="menu-icon octicon octicon-file" />
           {this.props.name}
