@@ -36,7 +36,8 @@ trait ExplorerControllerBase extends ControllerBase {
     Using.resource(Git.open(getRepositoryDir(repository.owner, repository.name))){ git =>
       if(!JGitUtil.isEmpty(git)) {
         JGitUtil.getDefaultBranch(git, repository, rev).map {
-          case (objectId, revision) => defining(JGitUtil.getRevCommitFromId(git, objectId)) { _ =>
+          case (objectId, revision) =>
+            JGitUtil.getRevCommitFromId(git, objectId)
             val pathList = revision :: (if(path == ".") Nil else path.split("/").toList)
             JGitUtil.getFileList(git, revision, path).map { file =>
               FileNode(file.name,
@@ -46,7 +47,6 @@ trait ExplorerControllerBase extends ControllerBase {
                   ).mkString("/"),
                 file.isDirectory)
             }
-          }
         }
       } else None
     }
