@@ -41,7 +41,7 @@ export default class Directory extends React.Component {
           try {
             this.setState({ children: JSON.parse(res.text) });
           } catch (e) {
-            return;
+            // not JSON, e.g. a sign-in page after the session expired
           }
         });
     }
