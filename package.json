@@ -7,7 +7,7 @@
     "test": "mocha",
     "build": "browserify -t babelify ./src/main/js/index.js -o ./src/main/resources/explorer/assets/bundle.js && sbt assembly",
     "watch": "watchify -t babelify ./src/main/js/index.js -o ./src/main/resources/explorer/assets/bundle.js",
-    "release": "set NODE_ENV=production && browserify ./src/main/js/index.js -t babelify -t envify | uglifyjs > ./src/main/resources/explorer/assets/bundle.js && sbt clean assembly"
+    "release": "browserify ./src/main/js/index.js -t babelify -g [ envify --NODE_ENV production ] | uglifyjs -c -m > ./src/main/resources/explorer/assets/bundle.js && sbt clean assembly"
   },
   "author": "tomoki1207",
   "license": "MIT",
